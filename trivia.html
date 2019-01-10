@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+  <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
+  <title>Science and Nature Trivia</title>
+  <script>
+    $(document).ready(function(){
+      $("li").remove();
+      $("#btn1").click(function(){
+        $.get("https://opentdb.com/api.php?amount=10&category=17", function(data){
+          console.log(data.results);
+          $("#q1").append("<b>Question</b>: " + data.results[0].question + "\n Choose an answer: " + data.results[0].incorrect_answers);
+        })
+      });
+
+      $("#btn2").click(function(){
+        $.get("https://opentdb.com/api.php?amount=10&category=17", function(data){
+          //console.log(data.results);
+          $("#q2").append("<b>Question</b>: " + data.results[0].question);
+          $("#a2").append("<li class = 'list-unstyled'><input type = 'checkbox'>"+ data.results[0].correct_answer + "</li>");
+
+          for (var i = 0; i< data.results[0].incorrect_answers.length; i++){
+            $("#a2").append("<li class = 'incorrect list-unstyled'><input type = 'checkbox'>"+ data.results[0].incorrect_answers[i] + "</li>");
+          };
+
+          $('li').click(function(){
+            var answer = $(this).text();
+            console.log(data.results[0].correct_answer);
+            console.log(answer); //whitespace matters here!
+            if(answer == data.results[0].correct_answer){
+              console.log("correct answer!");
+              $(".incorrect").remove();
+              // points += 100;
+            }
+          })
+        })
+      });
+
+      $("#btn3").click(function(){
+        $.get("https://opentdb.com/api.php?amount=10&category=17", function(data){
+          console.log(data.results);
+          $("#q3").append("Question: " + data.results[0].question + "\n Choose an answer: " + data.results[0].incorrect_answers);
+        })
+      });
+      $("#btn4").click(function(){
+        $.get("https://opentdb.com/api.php?amount=10&category=17", function(data){
+          console.log(data.results);
+          $("#q4").append("Question: " + data.results[0].question + "\n Choose an answer: " + data.results[0].incorrect_answers);
+        })
+      })
+    })
+  </script>
+</head>
+<body>
+
+  <div class="container">
+    <div class="heading mb-5">
+      <h1 class="text-center pb-3 pt-10 border-bottom">Science and Nature Trivia</h1>
+      <h5 class="text-center text-info">Choose any box to reveal the question! Your total points:</h5>
+    </div>
+
+    <div class="row">
+      <div class="col-md-3">
+        <button id = "btn1" class="btn btn-primary" style = "width: 200px; height: 200px;"></button>
+      </div>
+
+      <div class="col-md-3">
+        <button id = "btn2" class="btn btn-warning" style = "width: 200px; height: 200px;"></button>
+      </div>
+
+      <div class="col-md-3">
+        <button id = "btn3" class="btn btn-success" style = "width: 200px; height: 200px;"></button>
+      </div>
+
+      <div class="col-md-3">
+        <button id = "btn4" class="btn btn-danger" style = "width: 200px; height: 200px;"></button>
+      </div>
+    </div>
+
+      <div class="row">
+        <p id = "q1"></p>
+      </div>
+      <div class="row">
+        <p id = "a1">
+        </p>
+      </div>
+
+      <div class="row">
+        <p id = "q2"></p>
+      </div>
+      <div class="row">
+        <p>
+          <ul id="a2">
+              
+          </ul>
+        </p>
+      </div>
+
+      <div class="row">
+        <p id = "q3"> </p>
+      </div>
+      <div class="row">
+        <p id = "a3"></p>
+      </div>
+
+      <div class="row">
+        <p id = "q4"></p>
+      </div>
+      <div class="row">
+        <p id = "a4"></p>
+      </div>
+  </div>
+
+</body>
+</html>
